@@ -181,22 +181,41 @@
 
     <!-- Modals -->
     <div id="loginModal" class="modal">
-        <div class="modal-content active" id="login-form">
+        <div class="modal-content" id="login-form">
             <span class="close" onclick="closeModal('loginModal')">&times;</span>
             <h2>Login</h2>
             <form onsubmit="handleLogin(event)">
                 <input type="email" placeholder="Email Address" required>
                 <input type="password" placeholder="Password" required>
                 <button type="submit" class="primary-btn">Login</button>
-                <p>Don't have an Account? <a href="#register-form" onclick="showForm('register-form')">Register or Sign Up</a></p>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Don’t have an account? 
+                <button class="text-btn" onclick="switchToSignup()">Sign Up</button>
+            </p>
+        </div>
+    </div>
+    
+
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form onsubmit="handleSignup(event)">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Create Password" required>
+                <input type="password" placeholder="Confirm Password" required>
+                <button type="submit" class="primary-btn">Sign Up</button>
             </form>
         </div>
     </div>
+    
 
     <div id="emergencyModel" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('emergencyModel')">&times;</span>
-            <h2>Emergency Booking</h2>
+            <h2>Emergency Book</h2>
             <form onsubmit="handleEmergencyBooking(event)">
                 <input type="text" placeholder="Enter your Name" required>
                 <input type="Number" placeholder="Enter your Mobile Number" required>
