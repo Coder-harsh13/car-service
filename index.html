@@ -21,7 +21,7 @@
                 <a href="#pricing">Pricing</a>
                 <a href="#contact">Contact</a>
                 <button class="login-btn" onclick="openModal('loginModal')">Login</button>
-                <button class="primary-btn" onclick="openModal('bookingModal')">Emergency Book</button>
+                <button class="primary-btn" onclick="openModal('emergencyModel')">Emergency Book</button>
             </div>
             <button class="menu-btn" onclick="toggleMenu()">
                 <i class="lucide-menu"></i>
@@ -181,13 +181,30 @@
 
     <!-- Modals -->
     <div id="loginModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content active" id="login-form">
             <span class="close" onclick="closeModal('loginModal')">&times;</span>
             <h2>Login</h2>
             <form onsubmit="handleLogin(event)">
                 <input type="email" placeholder="Email Address" required>
                 <input type="password" placeholder="Password" required>
                 <button type="submit" class="primary-btn">Login</button>
+                <p>Don't have an Account? <a href="#register-form" onclick="showForm('register-form')">Register or Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="emergencyModel" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('emergencyModel')">&times;</span>
+            <h2>Emergency Booking</h2>
+            <form onsubmit="handleEmergencyBooking(event)">
+                <input type="text" placeholder="Enter your Name" required>
+                <input type="Number" placeholder="Enter your Mobile Number" required>
+                <input type="alphanumeric" placeholder="Car Number" required>
+                <input type="email" placeholder="Enter Email" required>
+                <button id="get-location-button" class="primary-btn">Get Live Location</button>
+                <button type="submit" class="primary-btn">Book Now</button>
+
             </form>
         </div>
     </div>
