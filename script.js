@@ -32,6 +32,21 @@ function handleLogin(event) {
     alert('Login functionality will be implemented soon!');
 }
 
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = 'block';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+// Switch from login to signup
+function switchToSignup() {
+    closeModal('loginModal');
+    openModal('signupModal');
+}
+
+
 function handleBooking(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
