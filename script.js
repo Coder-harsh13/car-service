@@ -113,4 +113,3 @@ function handleEmergencyBooking(e) {
     closeModal('emergencyModel');
     alert('Thank you! Our agent will call you shortly.');
 }
-  
