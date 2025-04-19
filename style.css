@@ -450,6 +450,12 @@ nav {
     
 }
 
+.map{
+    height:100px;
+    width: 100%;
+    border-radius: 10px;
+}
+
 /* Footer */
 footer {
     background-color: var(--secondary-color);
