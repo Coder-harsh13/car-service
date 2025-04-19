@@ -103,4 +103,14 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbxik8VY-OyZbTW9HCsNF5
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
       .then(response => console.log('Success!', response))
       .catch(error => console.error('Error!', error.message))
-  });
+    });
+
+  //energency booking
+function handleEmergencyBooking(e) {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target));
+    console.log('Emergency booking:', data);
+    closeModal('emergencyModel');
+    alert('Thank you! Our agent will call you shortly.');
+}
+  
