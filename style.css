@@ -339,6 +339,58 @@ nav {
     color: var(--success-color);
 }
 
+/* reviews.css */
+.reviews {
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.reviews h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.reviews-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 1rem;
+}
+
+.review-card {
+    min-width: 300px;
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-card h4 {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: black;
+}
+
+.stars {
+    color: gold;
+    font-size: 1.2rem;
+}
+
+.review-card p {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+
 /* Contact Section */
 .contact {
     padding: 5rem 2rem;
