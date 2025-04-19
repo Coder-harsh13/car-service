@@ -22,6 +22,7 @@
                 <a href="#contact">Contact</a>
                 <button class="login-btn" onclick="openModal('loginModal')">Login</button>
                 <button class="primary-btn" onclick="openModal('emergencyModel')">Emergency Book</button>
+                <a href="about.html" class="text-btn">About</a>
             </div>
             <button class="menu-btn" onclick="toggleMenu()">
                 <i class="lucide-menu"></i>
@@ -150,6 +151,37 @@
         </div>
     </section>
 
+    <!-- reviews.html -->
+    <section class="reviews">
+        <h2>What Our Customers Say</h2>
+        <marquee behavior="alternate" direction="left" scrollamount="5">
+            <div class="reviews-wrapper">
+            <!-- Review 1 -->
+                <div class="review-card">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Customer 1">
+                    <h4>Rohan Mehta</h4>
+                    <div class="stars">★★★★★</div>
+                    <p>Prompt and professional service. Highly recommended!</p>
+                </div>
+            <!-- Review 2 -->
+                <div class="review-card">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Customer 2">
+                    <h4>Priya Sharma</h4>
+                    <div class="stars">★★★★★</div>
+                    <p>The mechanic came right to my house and fixed the issue in no time.<br> Great experience!</p>
+                </div>
+            <!-- Review 3 -->
+                <div class="review-card">
+                    <img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Customer 3">
+                    <h4>Vikram Singh</h4>
+                    <div class="stars">★★★★★</div>
+                    <p>Excellent value for money. Friendly staff and quick repair.<br> Will use again!</p>
+                </div>
+            </div>
+        </marquee>
+    </section>
+
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <h2>Contact Us</h2>
@@ -170,7 +202,7 @@
                     <p>Serving all major cities</p>
                 </div>
             </div>
-            <form class="contact-form" onsubmit="handleContact(event)">
+            <form class="contact-form" onsubmit="handleContact(event)" name="submit-to-google-sheet-1">
                 <input type="text" placeholder="Your Name" name="Name" required>
                 <input type="email" placeholder="Email Address" name="Email" required>
                 <textarea placeholder="Message" name="Message" required></textarea>
@@ -233,8 +265,8 @@
             <span class="close" onclick="closeModal('bookingModal')">&times;</span>
             <h2>Book a Service</h2>
             <form onsubmit="handleBooking(event)" name="submit-to-google-sheet">
-                <select required>
-                    <option value="" name="Service">Select Service Type</option>
+                <select name="Service" required>
+                    <option value="">Select Service Type</option>
                     <option value="basic">Basic Service</option>
                     <option value="full">Full Service</option>
                     <option value="premium">Premium Service</option>
