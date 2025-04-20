@@ -1,4 +1,3 @@
-
 function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('active');
@@ -6,13 +5,19 @@ function toggleMenu() {
 
 // Modal functions
 function openModal(modalId) {
-    document.getElementById(modalId).style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
 // Close modal when clicking outside
@@ -21,7 +26,7 @@ window.onclick = function(event) {
         event.target.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-}
+};
 
 // Form handlers
 function handleLogin(event) {
@@ -32,20 +37,11 @@ function handleLogin(event) {
     alert('Login functionality will be implemented soon!');
 }
 
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = 'block';
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
-}
-
 // Switch from login to signup
 function switchToSignup() {
     closeModal('loginModal');
     openModal('signupModal');
 }
-
 
 function handleBooking(event) {
     event.preventDefault();
@@ -94,22 +90,69 @@ document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
 
-//service details
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxik8VY-OyZbTW9HCsNF5-fADs-IRX82WERhBme0xN3MYEbfTmRCxbRTB_qyvrMTmot/exec'
-  const form = document.forms['submit-to-google-sheet']
-
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => console.log('Success!', response))
-      .catch(error => console.error('Error!', error.message))
+// Service details (Google Sheets integration)
+const serviceForm = document.forms['submit-to-google-sheet'];
+if (serviceForm) {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxik8VY-OyZbTW9HCsNF5-fADs-IRX82WERhBme0xN3MYEbfTmRCxbRTB_qyvrMTmot/exec';
+    serviceForm.addEventListener('submit', e => {
+        e.preventDefault();
+        fetch(scriptURL, { method: 'POST', body: new FormData(serviceForm) })
+            .then(response => console.log('Success!', response))
+            .catch(error => console.error('Error!', error.message));
     });
+}
 
-  //energency booking
+// Emergency booking
 function handleEmergencyBooking(e) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
     console.log('Emergency booking:', data);
     closeModal('emergencyModel');
     alert('Thank you! Our agent will call you shortly.');
+}
+
+// Get user's location
+function getUserLocation(callback) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const coords = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                };
+                console.log('User location:', coords);
+                callback(coords);
+            },
+            error => {
+                console.error('Error getting location:', error.message);
+                alert('Unable to retrieve location. Please allow location access.');
+                callback(null);
+            }
+        );
+    } else {
+        alert('Geolocation is not supported by this browser.');
+        callback(null);
+    }
+}
+
+// Emergency booking with location
+function handleEmergencyBooking(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    getUserLocation(location => {
+        if (location) {
+            data.latitude = location.latitude;
+            data.longitude = location.longitude;
+        } else {
+            data.latitude = 'Not available';
+            data.longitude = 'Not available';
+        }
+
+        console.log('Emergency booking with location:', data);
+        closeModal('emergencyModel');
+        alert('Thank you! Our agent will call you shortly.');
+    });
 }
