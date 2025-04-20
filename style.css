@@ -134,6 +134,92 @@ nav {
     transform: translateX(5px);
 }
 
+/* Navigation Bar - Cart Icon */
+.cart-icon a {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.cart-icon a:hover {
+    color: #ffd700; /* Change to primary color */
+}
+
+/* Shopping Cart Page */
+.shopping-cart {
+    padding: 20px;
+    background-color: #1a1a1a; /* Same background color as the main page */
+    color: white;
+}
+
+.shopping-cart h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffd700; /* Primary color */
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2a2a2a; /* Darker background for the cart items */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+    padding-left: 15px;
+}
+
+.remove-item-btn {
+    background-color: #f44336; /* Red for remove button */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-item-btn:hover {
+    background-color: #e03e00;
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 1.8rem;
+    margin-top: 20px;
+}
+
+.checkout-btn {
+    background-color: #28a745; /* Green for checkout button */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.checkout-btn:hover {
+    background-color: #218838;
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -568,4 +654,111 @@ footer {
     .pricing-card.featured:hover {
         transform: translateY(-5px);
     }
+}
+
+
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .service-highlights,
+    .services-grid,
+    .steps-container,
+    .pricing-grid,
+    .contact-container {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .review-card {
+        min-width: 100%;
+    }
+
+    .info-item {
+        padding: 0;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        padding: 0.5rem 1rem;
+    }
+
+    .pricing-card.featured {
+        transform: none;
+    }
+
+    .pricing-card.featured:hover {
+        transform: translateY(-3px);
+    }
+
+    .modal-content {
+        margin: 10% auto;
+        width: 90%;
+    }
+
+    .map {
+        height: 150px;
+    }
+
+    .footer-content {
+        padding: 1rem;
+    }
+}
+
+/* Ultra-small screen tweaks */
+@media (max-width: 400px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .menu-btn {
+        font-size: 1.2rem;
+    }
+
+    .nav-links a {
+        font-size: 0.95rem;
+    }
+
+    .review-card img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
 }
