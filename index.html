@@ -163,21 +163,21 @@
                     <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Customer 1">
                     <h4>Rohan Mehta</h4>
                     <div class="stars">★★★★★</div>
-                    <p>Prompt and professional service. Highly recommended!</p>
+                    <p>Prompt and professional service. <br>Highly recommended!</p>
                 </div>
             <!-- Review 2 -->
                 <div class="review-card">
                     <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Customer 2">
                     <h4>Priya Sharma</h4>
                     <div class="stars">★★★★★</div>
-                    <p>The mechanic came right to my house and fixed the issue in no time.<br> Great experience!</p>
+                    <p>The mechanic came right to my house and fixed the issue in <br>no time. Great experience!</p>
                 </div>
             <!-- Review 3 -->
                 <div class="review-card">
                     <img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Customer 3">
                     <h4>Vikram Singh</h4>
                     <div class="stars">★★★★★</div>
-                    <p>Excellent value for money. Friendly staff and quick repair.<br> Will use again!</p>
+                    <p>Excellent value for money. Friendly staff and quick <br>repair. Will use again!</p>
                 </div>
             </div>
         </marquee>
@@ -250,14 +250,25 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('emergencyModel')">&times;</span>
             <h2>Emergency Book</h2>
-            <form onsubmit="handleEmergencyBooking(event)">
+            <form id="emergencyBookingForm" onsubmit="handleEmergencyBooking(event)">
                 <input type="text" placeholder="Enter your Name" required>
-                <input type="Number" placeholder="Enter your Mobile Number" required>
-                <input type="alphanumeric" placeholder="Car Number" required>
+                <input type="number" placeholder="Enter your Mobile Number" required>
+                <input type="text" placeholder="Car Number" required>
                 <input type="email" placeholder="Enter Email" required>
-                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.8149101143927!2d83.36957907521844!3d26.75028197674433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39914464ed623cab%3A0x90c7382db33ee6ae!2sDigvijay%20Nath%20Post%20Graduate%20College%2C%20Civil%20Lines%2C%20Gorakhpur!5e0!3m2!1sen!2sin!4v1745045653863!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"><p>Live Location</p></iframe>
+      
+            <!-- Hidden inputs to capture coordinates -->
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+      
+            <!-- Button to trigger sharing of live location -->
+                <button type="button" id="shareLocationBtn" class="primary-btn">
+                    <i class="lucide-map-pin"></i> Share My Location
+                </button>
+      
+            <!-- Map container, styled via existing .map class -->
+                <div id="emergencyMap" class="map" style="margin-top:1rem; display:none;"></div>
+      
                 <button type="submit" class="primary-btn">Book Now</button>
-
             </form>
         </div>
     </div>
