@@ -74,6 +74,17 @@ nav {
     font-size: 1.5rem;
 }
 
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-welcome {
+    font-weight: bold;
+}
+
+
 /* Buttons */
 .primary-btn {
     background-color: var(--primary-color);
