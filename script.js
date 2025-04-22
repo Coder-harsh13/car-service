@@ -30,12 +30,36 @@ window.onclick = function(event) {
 
 // Form handlers
 function handleLogin(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    console.log('Login attempt:', Object.fromEntries(formData));
-    closeModal('loginModal');
-    alert('Login functionality will be implemented soon!');
+    event.preventDefault(); // Prevent the default form submission
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch('login.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.trim() === 'Login successful!') {
+            // Close the login modal
+            closeModal('loginModal');
+
+            // Update the UI to show the user's profile
+            document.querySelector('.login-btn').style.display = 'none';
+            document.querySelector('.profile-btn').style.display = 'inline-block';
+
+            // Redirect to the homepage
+            window.location.href = 'index.html';
+        } else {
+            alert(data); // Show error message
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
+
 
 // Switch from login to signup
 function switchToSignup() {
@@ -50,7 +74,7 @@ function handleBooking(event) {
     closeModal('bookingModal');
     alert('Thank you for your booking! We will contact you shortly.');
 }
-
+/*
 function handleContact(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -58,6 +82,7 @@ function handleContact(event) {
     event.target.reset();
     alert('Thank you for your message! We will get back to you soon.');
 }
+    */
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -91,7 +116,7 @@ document.querySelectorAll('section').forEach(section => {
 });
 
 // Service details (Google Sheets integration)
-const serviceForm = document.forms['submit-to-google-sheet'];
+/*const serviceForm = document.forms['submit-to-google-sheet'];
 if (serviceForm) {
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxik8VY-OyZbTW9HCsNF5-fADs-IRX82WERhBme0xN3MYEbfTmRCxbRTB_qyvrMTmot/exec';
     serviceForm.addEventListener('submit', e => {
@@ -100,18 +125,11 @@ if (serviceForm) {
             .then(response => console.log('Success!', response))
             .catch(error => console.error('Error!', error.message));
     });
-}
+}*/
 
-// Emergency booking
-function handleEmergencyBooking(e) {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target));
-    console.log('Emergency booking:', data);
-    closeModal('emergencyModel');
-    alert('Thank you! Our agent will call you shortly.');
-}
 
 // Get user's location
+
 function getUserLocation(callback) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -153,6 +171,6 @@ function handleEmergencyBooking(e) {
 
         console.log('Emergency booking with location:', data);
         closeModal('emergencyModel');
-        alert('Thank you! Our agent will call you shortly.');
+        //alert('Thank you! Our agent will call you shortly.');
     });
 }
