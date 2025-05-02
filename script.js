@@ -174,3 +174,50 @@ function handleEmergencyBooking(e) {
         //alert('Thank you! Our agent will call you shortly.');
     });
 }
+
+
+// Handle Review Submit
+document.getElementById('reviewForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent normal form submit
+
+    var formData = new FormData(this);
+
+    fetch('save_review.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.trim() === 'success') {
+            // Get input values
+            var name = document.querySelector('#reviewForm input[name="name"]').value;
+            var rating = document.querySelector('#reviewForm select[name="rating"]').value;
+            var reviewText = document.querySelector('#reviewForm textarea[name="review"]').value;
+
+            // Create new review card
+            var newReview = `
+                <div class="review-card">
+                    <img src="https://randomuser.me/api/portraits/lego/${Math.floor(Math.random() * 10)}.jpg" alt="Customer">
+                    <h4>${name}</h4>
+                    <div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>
+                    <p>${reviewText}</p>
+                </div>
+            `;
+
+            // Add it to the reviews wrapper
+            document.querySelector('.reviews-wrapper').innerHTML += newReview;
+
+            // Reset form
+            document.getElementById('reviewForm').reset();
+
+            // Close modal
+            closeModal('reviewModal');
+        } else {
+            alert('Error saving review. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Server error.');
+    });
+});
