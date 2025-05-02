@@ -6,6 +6,7 @@
   <title>About Us – Mechanic On Wheel</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/lucide-static@0.344.0/font/lucide.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <!-- Partner section styles -->
   <style>
     .partners-section {
@@ -98,6 +99,34 @@
   font-size: 40px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+}
+.socialIcons a {
+    text-decoration: none;;
+    padding: 10px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 50%;
+}
+.socialIcons a i{
+  font-size: 2em;
+  color: black;
+  opacity: 0.9;
+}
+
+/*hover effect*/
+.socialIcons a:hover {
+  background-color: yellow;
+  transition: 0.5s;
+}
+
+.social Icons a:hover i{
+  color: white;
+  transition: 0.5s;
 }
 
 @keyframes zoomIn {
@@ -224,12 +253,45 @@
           <img src="./mobil 1.jpg" alt="Partner 5" />
           <p>Mobil 1</p>
         </div>
+        <div class="partner-card">
+          <img src="./revolt.png" alt="Partner 6" />
+          <p>Revolt</p>
+      </div>
+      <div class="partner-card">
+          <img src="./okaya.png" alt="Partner 7" />
+          <p>Okaya</p>
+      </div>
+      <div class="partner-card">
+          <img src="./blu.jpg" alt="Partner 8" />
+          <p>Blu</p>
+      </div>
+      <div class="partner-card">
+          <img src="./revamp.jpg" alt="Partner 9" />
+          <p>Revamp.jpg</p>
+      </div>
+      <div class="partner-card">
+          <img src="./osm.jpg" alt="Partner 10" />
+          <p>OSM</p>
+      </div>
+      <div class="partner-card">
+          <img src="./hero.jpg" alt="Partner 11" />
+          <p>Hero-Electric</p>
+      </div>
+      <div class="partner-card">
+          <img src="./zoomcar.jpg" alt="Partner 12" />
+          <p>Zoomcar</p>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="footer-content">
+      <div class="socialIcons">
+      <a href=""><i class="fa-brands fa-facebook"></i></a>
+      <a href=""><i class="fa-brands fa-twitter"></i></a>
+      <a href=""><i class="fa-brands fa-instagram"></i></a>
+      <a href=""><i class="fa-brands fa-linkedin"></i></a>
+      <a href=""><i class="fa-brands fa-google-plus"></i></a>
       <div class="footer-logo">
         <i class="lucide-wrench"></i>
         <span>24/7 Auto Care</span>
