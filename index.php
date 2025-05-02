@@ -166,8 +166,41 @@ session_start();
         </div>
     </section>
 
+    <!-- After the pricing section -->
+<section id="review-trigger" class="pricing">
+    <div class="pricing-grid">
+        <!-- existing pricing cards... -->
+    </div>
+    <div style="display: flex; justify-content:center; margin-top: 2rem;">
+        <button class="primary-btn" onclick="openModal('reviewModal')">Leave a Review</button>
+    </div>
+
+</section>
+
+<!-- Review Modal -->
+<div id="reviewModal" class="modal">
+    <div class="modal-content" id="reviewPopup">
+        <span class="close" onclick="closeModal('reviewModal')">&times;</span>
+        <h2>Submit Your Review</h2>
+        <form id="reviewForm" action="save_review.php" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <select name="rating" required>
+                <option value="">Rating</option>
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+            </select>
+            <textarea name="review" placeholder="Your Review" required></textarea>
+            <button type="submit" class="primary-btn">Submit Review</button>
+        </form>
+    </div>
+</div>
+
+
     <!-- reviews.html -->
-    <section class="reviews">
+    <section class="reviews" id="customerReviews">
         <h2>What Our Customers Say</h2>
         <marquee behavior="alternate" direction="left" scrollamount="5">
             <div class="reviews-wrapper">
