@@ -28,12 +28,13 @@ session_start();
                 <a href="#services">Services</a>
                 <a href="#how-it-works">How it Works</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#contact">Contact</a>
                 <?php if (isset($_SESSION['username'])): ?>
                     <a href="profile.php" class="login-btn"><?= htmlspecialchars($_SESSION['username']) ?></a>
+                    <button class="text-btn" onclick="location.href='logout.php'">LOGOUT</button>
                 <?php else: ?>
                     <a href="login.php" class="login-btn" onclick="openModal('loginModal')">Login</a>
                 <?php endif; ?>
+
 
 
                 <button class="primary-btn" onclick="openModal('emergencyModel')">Emergency Book</button>
@@ -52,7 +53,7 @@ session_start();
             <p>Professional mechanics available 24*7. We come to you!</p>
             <div class="hero-buttons">
                 <button class="primary-btn" onclick="openModal('bookingModal')">Schedule Service</button>
-                <button class="secondary-btn">Learn More</button>
+                <a href="about.php" class="secondary-btn">Learn More</a>
             </div>
             <div class="service-highlights">
                 <div class="highlight-card">
@@ -206,21 +207,21 @@ session_start();
             <div class="reviews-wrapper">
             <!-- Review 1 -->
                 <div class="review-card">
-                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Customer 1">
+                    <img src="admin pic.jpg" alt="Customer 1">
                     <h4>Rohan Mehta</h4>
                     <div class="stars">★★★★★</div>
                     <p>Prompt and professional service. <br>Highly recommended!</p>
                 </div>
             <!-- Review 2 -->
                 <div class="review-card">
-                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Customer 2">
+                    <img src="admins.jpg" alt="Customer 2">
                     <h4>Priya Sharma</h4>
                     <div class="stars">★★★★★</div>
                     <p>The mechanic came right to my house and fixed the issue in <br>no time. Great experience!</p>
                 </div>
             <!-- Review 3 -->
                 <div class="review-card">
-                    <img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Customer 3">
+                    <img src="adminss.jpeg" alt="Customer 3">
                     <h4>Vikram Singh</h4>
                     <div class="stars">★★★★★</div>
                     <p>Excellent value for money. Friendly staff and quick <br>repair. Will use again!</p>
@@ -232,7 +233,7 @@ session_start();
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
-        <h2>Contact Us</h2>
+        <h2>BE PARTNER WITH US</h2>
         <div class="contact-container">
             <div class="contact-info">
                 <h2>SERVE WITH US
