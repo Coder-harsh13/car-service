@@ -11,23 +11,31 @@ require_once $configPath;
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name     = trim($_POST['name'] ?? '');
-    $email    = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-    $password = $_POST['password'] ?? '';
-    $confirm  = $_POST['confirm_password'] ?? '';
+    $name       = trim($_POST['name'] ?? '');
+    $emailRaw   = trim($_POST['email'] ?? '');
+    $password   = $_POST['password'] ?? '';
+    $confirm    = $_POST['confirm_password'] ?? '';
 
-    if (empty($name) || !$email || empty($password) || empty($confirm)) {
+    // Validate email format strictly
+    $isEmailFormatValid = preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net|in)$/', $emailRaw);
+    $hasExtraAfterDomain = preg_replace('/.*\.(com|org|net|in)/i', '', $emailRaw);
+    
+    if (empty($name) || empty($emailRaw) || empty($password) || empty($confirm)) {
         $error = 'All fields are required.';
+    } elseif (!filter_var($emailRaw, FILTER_VALIDATE_EMAIL) || !$isEmailFormatValid || !empty($hasExtraAfterDomain)) {
+        $error = 'Invalid email format. Example: user@example.com';
     } elseif ($password !== $confirm) {
         $error = 'Passwords do not match.';
     } else {
+        $email = $emailRaw; // only assign after validation passes
+
         // Database connection
         $conn = new mysqli($servername, $db_user, $db_pass, $dbname);
         if ($conn->connect_error) {
             die('Database connection failed: ' . $conn->connect_error);
         }
 
-        // Check if email already registered
+        // Check if email already exists
         $stmt = $conn->prepare('SELECT id FROM users WHERE email = ?');
         $stmt->bind_param('s', $email);
         $stmt->execute();
@@ -52,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->close();
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,8 +173,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="nav-links">
                 <a href="index.php">Home</a>
                 <a href="about.html">About</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
+                <a href="index.php#services">Services</a>
+                <a href="index.php#contact">Contact</a>
                 <?php if (!empty($_SESSION['user_id'])): ?>
                     <button class="text-btn" onclick="location.href='logout.php'">Logout</button>
                 <?php else: ?>
@@ -182,6 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section class="login-page">
         <div class="login-card">
             <h2>Create Your Account</h2>
+
             <?php if ($error): ?>
                 <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
             <?php endif; ?>
@@ -193,6 +203,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" placeholder="you@example.com" required>
+                    <span id="emailError" style="color:red; font-size: 0.9em;"></span>
+
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
