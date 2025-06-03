@@ -164,9 +164,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="nav-links">
                 <a href="index.php">Home</a>
-                <a href="about.html">About</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
+                <a href="about.php">About</a>
+                <a href="index.php#services">Services</a>
+                <a href="index.php#contact">Contact</a>
                 <button class="primary-btn" onclick="location.href='signup.php'">Sign Up</button>
 
             </div>
