@@ -402,11 +402,12 @@ nav {
 }
 
 .pricing-card.featured {
-    border: 2px solid var(--primary-color);
+    /* border: 2px solid var(--primary-color); */
     transform: scale(1.05);
 }
 
 .pricing-card:hover {
+    border: 2px solid var(--primary-color);
     transform: translateY(-5px);
 }
 
