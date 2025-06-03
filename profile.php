@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Get username for display
-$username = $_SESSION['username'];
+// $username = $_SESSION['username'];
 // Fetch user info
 $user_query = $conn->prepare("SELECT name, email FROM users WHERE id = ?");
 $user_query->bind_param("i", $user_id);
@@ -96,9 +96,9 @@ table td {
 
 .primary-btn {
     padding: 0.6rem 1.2rem;
-    background-color: #e91e63;
+    background-color:var(--primary-color);
     border: none;
-    color: white;
+    color: black;
     font-size: 1rem;
     border-radius: 8px;
     cursor: pointer;
@@ -106,7 +106,7 @@ table td {
 }
 
 .primary-btn:hover {
-    background-color: #d81b60;
+    background-color:#ffed4a;
 }
 </style>
 </head>
@@ -145,7 +145,8 @@ table td {
 
 
 
-        <a href="index.php" class="primary-btn" style="margin-right: 10px;">Home</a>
+        <a href="index.php?user=<?php echo urlencode($user['name']); ?>" class="primary-btn" style="margin-right: 10px;">Home</a>
+
         <form action="logout.php" method="post" style="display: inline;">
             <button type="submit" class="primary-btn">Logout</button>
         </form>
