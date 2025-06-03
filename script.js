@@ -74,15 +74,24 @@ function handleBooking(event) {
     closeModal('bookingModal');
     alert('Thank you for your booking! We will contact you shortly.');
 }
-/*
-function handleContact(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    console.log('Contact form:', Object.fromEntries(formData));
-    event.target.reset();
-    alert('Thank you for your message! We will get back to you soon.');
-}
-    */
+
+//Email Invalid
+
+document.addEventListener('DOMContentLoaded', () => {
+    const emailInput = document.getElementById('email');
+    emailInput.addEventListener('input', () => {
+        const email = emailInput.value.trim();
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net|in)$/;
+        const extraAfterDomain = email.replace(/.*\.(com|org|net|in)/i, '');
+
+        if (!emailPattern.test(email) || extraAfterDomain.length > 0) {
+            emailInput.setCustomValidity('Invalid email format (e.g., user@example.com)');
+        } else {
+            emailInput.setCustomValidity('');
+        }
+    });
+});
+
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -115,65 +124,6 @@ document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
 
-// Service details (Google Sheets integration)
-/*const serviceForm = document.forms['submit-to-google-sheet'];
-if (serviceForm) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxik8VY-OyZbTW9HCsNF5-fADs-IRX82WERhBme0xN3MYEbfTmRCxbRTB_qyvrMTmot/exec';
-    serviceForm.addEventListener('submit', e => {
-        e.preventDefault();
-        fetch(scriptURL, { method: 'POST', body: new FormData(serviceForm) })
-            .then(response => console.log('Success!', response))
-            .catch(error => console.error('Error!', error.message));
-    });
-}*/
-
-
-// Get user's location
-
-function getUserLocation(callback) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                const coords = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                };
-                console.log('User location:', coords);
-                callback(coords);
-            },
-            error => {
-                console.error('Error getting location:', error.message);
-                alert('Unable to retrieve location. Please allow location access.');
-                callback(null);
-            }
-        );
-    } else {
-        alert('Geolocation is not supported by this browser.');
-        callback(null);
-    }
-}
-
-// Emergency booking with location
-function handleEmergencyBooking(e) {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
-
-    getUserLocation(location => {
-        if (location) {
-            data.latitude = location.latitude;
-            data.longitude = location.longitude;
-        } else {
-            data.latitude = 'Not available';
-            data.longitude = 'Not available';
-        }
-
-        console.log('Emergency booking with location:', data);
-        closeModal('emergencyModel');
-        //alert('Thank you! Our agent will call you shortly.');
-    });
-}
 
 
 // Handle Review Submit
@@ -221,3 +171,80 @@ document.getElementById('reviewForm').addEventListener('submit', function(e) {
         alert('Server error.');
     });
 });
+
+
+//Get user location and share it
+function shareLocationBtn(callback) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const coords = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                };
+                console.log('User location:', coords);
+                callback(coords);
+            },
+            error => {
+                console.error('Error getting location:', error.message);
+                alert('Unable to retrieve location. Please allow location access.');
+                callback(null);
+            }
+        );
+    } else {
+        alert('Geolocation is not supported by this browser.');
+        callback(null);
+    }
+}
+
+function handleEmergencyBooking(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    shareLocationBtn(location => {
+        if (location) {
+            formData.set('latitude', location.latitude);
+            formData.set('longitude', location.longitude);
+        }
+
+        fetch('save_emergency.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                closeModal('emergencyModel');
+                alert('Thank you! Our agent will call you shortly.');
+                form.reset();
+            } else {
+                alert('Failed to book emergency service.');
+            }
+        })
+        .catch(error => {
+            console.error('Booking error:', error);
+            alert('Error submitting form.');
+        });
+    });
+}
+
+function handleLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                document.getElementById('latitude').value = position.coords.latitude;
+                document.getElementById('longitude').value = position.coords.longitude;
+                document.getElementById('emergencyMap').style.display = 'block';
+                document.getElementById('emergencyMap').innerHTML = `
+                    <iframe width="100%" height="100" frameborder="0"
+                        src="https://maps.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}&z=15&output=embed">
+                    </iframe>`;
+            },
+            error => {
+                alert('Could not get your location.');
+            }
+        );
+    } else {
+        alert('Geolocation is not supported by this browser.');
+    }
+}
