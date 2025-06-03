@@ -6,7 +6,6 @@ session_start();
 ?>
 
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -217,7 +216,7 @@ session_start();
                     <img src="admins.jpg" alt="Customer 2">
                     <h4>Priya Sharma</h4>
                     <div class="stars">★★★★★</div>
-                    <p>The mechanic came right to my house and fixed the issue in <br>no time. Great experience!</p>
+                    <p>The mechanic came right to my house and fixed the <br> issue in no time. Great experience!</p>
                 </div>
             <!-- Review 3 -->
                 <div class="review-card">
@@ -267,10 +266,10 @@ session_start();
             <span class="close" onclick="closeModal('emergencyModel')">&times;</span>
             <h2>Emergency Book</h2>
             
-            <form action="save_emergency.php" method="POST" id="emergencyBookingForm" >
+            <form action="save_emergency.php" method="POST" id="emergencyBookingForm" onsubmit="handleEmergencyBooking(event)" >
             <input type="text" name="Name" placeholder="Enter your Name" required>
             <input type="number" name="Mobile" placeholder="Enter your Mobile Number" required>
-            <input type="text" name="CarNumber" placeholder="Car Number" required>
+            <input type="text" name="CarNumber" placeholder="Vehicle Number" required>
             <input type="email" name="Email" placeholder="Enter Email" required>
 
       
@@ -279,9 +278,7 @@ session_start();
                 <input type="hidden" id="longitude" name="longitude">
       
             <!-- Button to trigger sharing of live location -->
-                <button type="button" id="shareLocationBtn" class="primary-btn">
-                    <i class="lucide-map-pin"></i> Share My Location
-                </button>
+                <button type="button" onclick="handleLocation()" class="primary-btn">Share My Location</button>
       
             <!-- Map container, styled via existing .map class -->
                 <div id="emergencyMap" class="map" style="margin-top:1rem; display:none;"></div>
