@@ -292,12 +292,15 @@
       <a href=""><i class="fa-brands fa-instagram"></i></a>
       <a href=""><i class="fa-brands fa-linkedin"></i></a>
       <a href=""><i class="fa-brands fa-google-plus"></i></a>
+    </div>
+    <div>
       <div class="footer-logo">
-        <i class="lucide-wrench"></i>
-        <span>24/7 Auto Care</span>
+          <i class="lucide-wrench"></i>
+          <span>24/7 Auto Care</span>
       </div>
       <p>&copy; 2025 24/7 Auto Care. All rights reserved.</p>
     </div>
+
   </footer>
 
   <script src="script.js">
